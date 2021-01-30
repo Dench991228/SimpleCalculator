@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Integer Calculator</title>
+    <script src="./index.js" defer></script>
+</head>
+<body>
+    <h1>A simple calculator written in JavaScript powered by ANTLR</h1>
+    <hr>
+    <h2>Type in expression here</h2>
+    <div id="editor" contenteditable="true" style="min-height: 30ex; border: 1px solid lightgray"></div>
+    <button onclick="executeParse()">Calculate!</button>
+    <div id="display">
+        <p id="output" style="display: inline-block"></p>
+        <p id="stack" style="display: inline-block"></p>
+    </div>
+
+</body>
+</html>

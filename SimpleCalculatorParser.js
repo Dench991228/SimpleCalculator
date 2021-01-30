@@ -1,6 +1,6 @@
 // Generated from SimpleCalculator.g4 by ANTLR 4.7
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
+var antlr4 = require('./antlr4/index');
 var SimpleCalculatorListener = require('./SimpleCalculatorListener').SimpleCalculatorListener;
 var grammarFileName = "SimpleCalculator.g4";
 
