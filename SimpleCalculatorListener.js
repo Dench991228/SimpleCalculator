@@ -20,30 +20,57 @@ SimpleCalculatorListener.prototype.exitProgram = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SimpleCalculatorParser#expression.
-SimpleCalculatorListener.prototype.enterExpression = function(ctx) {
+// Enter a parse tree produced by SimpleCalculatorParser#additiveItem.
+SimpleCalculatorListener.prototype.enterAdditiveItem = function(ctx) {
 };
 
-// Exit a parse tree produced by SimpleCalculatorParser#expression.
-SimpleCalculatorListener.prototype.exitExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SimpleCalculatorParser#item.
-SimpleCalculatorListener.prototype.enterItem = function(ctx) {
-};
-
-// Exit a parse tree produced by SimpleCalculatorParser#item.
-SimpleCalculatorListener.prototype.exitItem = function(ctx) {
+// Exit a parse tree produced by SimpleCalculatorParser#additiveItem.
+SimpleCalculatorListener.prototype.exitAdditiveItem = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SimpleCalculatorParser#factor.
-SimpleCalculatorListener.prototype.enterFactor = function(ctx) {
+// Enter a parse tree produced by SimpleCalculatorParser#singleItem.
+SimpleCalculatorListener.prototype.enterSingleItem = function(ctx) {
 };
 
-// Exit a parse tree produced by SimpleCalculatorParser#factor.
-SimpleCalculatorListener.prototype.exitFactor = function(ctx) {
+// Exit a parse tree produced by SimpleCalculatorParser#singleItem.
+SimpleCalculatorListener.prototype.exitSingleItem = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SimpleCalculatorParser#singleFactor.
+SimpleCalculatorListener.prototype.enterSingleFactor = function(ctx) {
+};
+
+// Exit a parse tree produced by SimpleCalculatorParser#singleFactor.
+SimpleCalculatorListener.prototype.exitSingleFactor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SimpleCalculatorParser#multiplicativeFactor.
+SimpleCalculatorListener.prototype.enterMultiplicativeFactor = function(ctx) {
+};
+
+// Exit a parse tree produced by SimpleCalculatorParser#multiplicativeFactor.
+SimpleCalculatorListener.prototype.exitMultiplicativeFactor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SimpleCalculatorParser#parenthesesFactor.
+SimpleCalculatorListener.prototype.enterParenthesesFactor = function(ctx) {
+};
+
+// Exit a parse tree produced by SimpleCalculatorParser#parenthesesFactor.
+SimpleCalculatorListener.prototype.exitParenthesesFactor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SimpleCalculatorParser#integerFactor.
+SimpleCalculatorListener.prototype.enterIntegerFactor = function(ctx) {
+};
+
+// Exit a parse tree produced by SimpleCalculatorParser#integerFactor.
+SimpleCalculatorListener.prototype.exitIntegerFactor = function(ctx) {
 };
 
 

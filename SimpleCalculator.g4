@@ -1,9 +1,9 @@
 grammar SimpleCalculator;
 
 program: expression;
-expression: expression(ADD|SUB)item|item;
-item: item(MUL|DIV)factor|factor;
-factor: L_PAREN expression R_PAREN|INT;
+expression: expression(ADD|SUB)item #additiveItem|item # singleItem;
+item: item(MUL|DIV)factor # multiplicativeFactor|factor # singleFactor;
+factor: L_PAREN expression R_PAREN # parenthesesFactor|INT # integerFactor;
 
 ADD : '+';
 SUB : '-';

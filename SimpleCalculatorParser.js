@@ -154,31 +154,74 @@ function ExpressionContext(parser, parent, invokingState) {
 ExpressionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ExpressionContext.prototype.constructor = ExpressionContext;
 
-ExpressionContext.prototype.item = function() {
-    return this.getTypedRuleContext(ItemContext,0);
+
+ 
+ExpressionContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
 
-ExpressionContext.prototype.expression = function() {
+function AdditiveItemContext(parser, ctx) {
+	ExpressionContext.call(this, parser);
+    ExpressionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+AdditiveItemContext.prototype = Object.create(ExpressionContext.prototype);
+AdditiveItemContext.prototype.constructor = AdditiveItemContext;
+
+SimpleCalculatorParser.AdditiveItemContext = AdditiveItemContext;
+
+AdditiveItemContext.prototype.expression = function() {
     return this.getTypedRuleContext(ExpressionContext,0);
 };
 
-ExpressionContext.prototype.ADD = function() {
+AdditiveItemContext.prototype.item = function() {
+    return this.getTypedRuleContext(ItemContext,0);
+};
+
+AdditiveItemContext.prototype.ADD = function() {
     return this.getToken(SimpleCalculatorParser.ADD, 0);
 };
 
-ExpressionContext.prototype.SUB = function() {
+AdditiveItemContext.prototype.SUB = function() {
     return this.getToken(SimpleCalculatorParser.SUB, 0);
 };
-
-ExpressionContext.prototype.enterRule = function(listener) {
+AdditiveItemContext.prototype.enterRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.enterExpression(this);
+        listener.enterAdditiveItem(this);
 	}
 };
 
-ExpressionContext.prototype.exitRule = function(listener) {
+AdditiveItemContext.prototype.exitRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.exitExpression(this);
+        listener.exitAdditiveItem(this);
+	}
+};
+
+
+function SingleItemContext(parser, ctx) {
+	ExpressionContext.call(this, parser);
+    ExpressionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SingleItemContext.prototype = Object.create(ExpressionContext.prototype);
+SingleItemContext.prototype.constructor = SingleItemContext;
+
+SimpleCalculatorParser.SingleItemContext = SingleItemContext;
+
+SingleItemContext.prototype.item = function() {
+    return this.getTypedRuleContext(ItemContext,0);
+};
+SingleItemContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.enterSingleItem(this);
+	}
+};
+
+SingleItemContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.exitSingleItem(this);
 	}
 };
 
@@ -197,6 +240,10 @@ SimpleCalculatorParser.prototype.expression = function(_p) {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        localctx = new SingleItemContext(this, localctx);
+        this._ctx = localctx;
+        _prevctx = localctx;
+
         this.state = 11;
         this.item(0);
         this._ctx.stop = this._input.LT(-1);
@@ -209,7 +256,7 @@ SimpleCalculatorParser.prototype.expression = function(_p) {
                     this.triggerExitRuleEvent();
                 }
                 _prevctx = localctx;
-                localctx = new ExpressionContext(this, _parentctx, _parentState);
+                localctx = new AdditiveItemContext(this, new ExpressionContext(this, _parentctx, _parentState));
                 this.pushNewRecursionContext(localctx, _startState, SimpleCalculatorParser.RULE_expression);
                 this.state = 13;
                 if (!( this.precpred(this._ctx, 2))) {
@@ -262,31 +309,74 @@ function ItemContext(parser, parent, invokingState) {
 ItemContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ItemContext.prototype.constructor = ItemContext;
 
-ItemContext.prototype.factor = function() {
+
+ 
+ItemContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+function SingleFactorContext(parser, ctx) {
+	ItemContext.call(this, parser);
+    ItemContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+SingleFactorContext.prototype = Object.create(ItemContext.prototype);
+SingleFactorContext.prototype.constructor = SingleFactorContext;
+
+SimpleCalculatorParser.SingleFactorContext = SingleFactorContext;
+
+SingleFactorContext.prototype.factor = function() {
     return this.getTypedRuleContext(FactorContext,0);
 };
-
-ItemContext.prototype.item = function() {
-    return this.getTypedRuleContext(ItemContext,0);
-};
-
-ItemContext.prototype.MUL = function() {
-    return this.getToken(SimpleCalculatorParser.MUL, 0);
-};
-
-ItemContext.prototype.DIV = function() {
-    return this.getToken(SimpleCalculatorParser.DIV, 0);
-};
-
-ItemContext.prototype.enterRule = function(listener) {
+SingleFactorContext.prototype.enterRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.enterItem(this);
+        listener.enterSingleFactor(this);
 	}
 };
 
-ItemContext.prototype.exitRule = function(listener) {
+SingleFactorContext.prototype.exitRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.exitItem(this);
+        listener.exitSingleFactor(this);
+	}
+};
+
+
+function MultiplicativeFactorContext(parser, ctx) {
+	ItemContext.call(this, parser);
+    ItemContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+MultiplicativeFactorContext.prototype = Object.create(ItemContext.prototype);
+MultiplicativeFactorContext.prototype.constructor = MultiplicativeFactorContext;
+
+SimpleCalculatorParser.MultiplicativeFactorContext = MultiplicativeFactorContext;
+
+MultiplicativeFactorContext.prototype.item = function() {
+    return this.getTypedRuleContext(ItemContext,0);
+};
+
+MultiplicativeFactorContext.prototype.factor = function() {
+    return this.getTypedRuleContext(FactorContext,0);
+};
+
+MultiplicativeFactorContext.prototype.MUL = function() {
+    return this.getToken(SimpleCalculatorParser.MUL, 0);
+};
+
+MultiplicativeFactorContext.prototype.DIV = function() {
+    return this.getToken(SimpleCalculatorParser.DIV, 0);
+};
+MultiplicativeFactorContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.enterMultiplicativeFactor(this);
+	}
+};
+
+MultiplicativeFactorContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.exitMultiplicativeFactor(this);
 	}
 };
 
@@ -305,6 +395,10 @@ SimpleCalculatorParser.prototype.item = function(_p) {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
+        localctx = new SingleFactorContext(this, localctx);
+        this._ctx = localctx;
+        _prevctx = localctx;
+
         this.state = 22;
         this.factor();
         this._ctx.stop = this._input.LT(-1);
@@ -317,7 +411,7 @@ SimpleCalculatorParser.prototype.item = function(_p) {
                     this.triggerExitRuleEvent();
                 }
                 _prevctx = localctx;
-                localctx = new ItemContext(this, _parentctx, _parentState);
+                localctx = new MultiplicativeFactorContext(this, new ItemContext(this, _parentctx, _parentState));
                 this.pushNewRecursionContext(localctx, _startState, SimpleCalculatorParser.RULE_item);
                 this.state = 24;
                 if (!( this.precpred(this._ctx, 2))) {
@@ -370,34 +464,73 @@ function FactorContext(parser, parent, invokingState) {
 FactorContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 FactorContext.prototype.constructor = FactorContext;
 
-FactorContext.prototype.L_PAREN = function() {
+
+ 
+FactorContext.prototype.copyFrom = function(ctx) {
+    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
+};
+
+
+function IntegerFactorContext(parser, ctx) {
+	FactorContext.call(this, parser);
+    FactorContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+IntegerFactorContext.prototype = Object.create(FactorContext.prototype);
+IntegerFactorContext.prototype.constructor = IntegerFactorContext;
+
+SimpleCalculatorParser.IntegerFactorContext = IntegerFactorContext;
+
+IntegerFactorContext.prototype.INT = function() {
+    return this.getToken(SimpleCalculatorParser.INT, 0);
+};
+IntegerFactorContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.enterIntegerFactor(this);
+	}
+};
+
+IntegerFactorContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SimpleCalculatorListener ) {
+        listener.exitIntegerFactor(this);
+	}
+};
+
+
+function ParenthesesFactorContext(parser, ctx) {
+	FactorContext.call(this, parser);
+    FactorContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+ParenthesesFactorContext.prototype = Object.create(FactorContext.prototype);
+ParenthesesFactorContext.prototype.constructor = ParenthesesFactorContext;
+
+SimpleCalculatorParser.ParenthesesFactorContext = ParenthesesFactorContext;
+
+ParenthesesFactorContext.prototype.L_PAREN = function() {
     return this.getToken(SimpleCalculatorParser.L_PAREN, 0);
 };
 
-FactorContext.prototype.expression = function() {
+ParenthesesFactorContext.prototype.expression = function() {
     return this.getTypedRuleContext(ExpressionContext,0);
 };
 
-FactorContext.prototype.R_PAREN = function() {
+ParenthesesFactorContext.prototype.R_PAREN = function() {
     return this.getToken(SimpleCalculatorParser.R_PAREN, 0);
 };
-
-FactorContext.prototype.INT = function() {
-    return this.getToken(SimpleCalculatorParser.INT, 0);
-};
-
-FactorContext.prototype.enterRule = function(listener) {
+ParenthesesFactorContext.prototype.enterRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.enterFactor(this);
+        listener.enterParenthesesFactor(this);
 	}
 };
 
-FactorContext.prototype.exitRule = function(listener) {
+ParenthesesFactorContext.prototype.exitRule = function(listener) {
     if(listener instanceof SimpleCalculatorListener ) {
-        listener.exitFactor(this);
+        listener.exitParenthesesFactor(this);
 	}
 };
-
 
 
 
@@ -412,6 +545,7 @@ SimpleCalculatorParser.prototype.factor = function() {
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case SimpleCalculatorParser.L_PAREN:
+            localctx = new ParenthesesFactorContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
             this.state = 32;
             this.match(SimpleCalculatorParser.L_PAREN);
@@ -421,6 +555,7 @@ SimpleCalculatorParser.prototype.factor = function() {
             this.match(SimpleCalculatorParser.R_PAREN);
             break;
         case SimpleCalculatorParser.INT:
+            localctx = new IntegerFactorContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 36;
             this.match(SimpleCalculatorParser.INT);
